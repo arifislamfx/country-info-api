@@ -1,47 +1,24 @@
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import CountryInfo from "./components/CountryInfo/CountryInfo";
+import Header from "./components/Header/Header";
+import Home from "./components/Home/Home";
 
-    import { useEffect, useState } from 'react';
-    import './App.css';
-import Cart from './components/Cart/Cart';
-    import Country from './components/Country/Country';
+const App = () => {
+  return (
+    <div>
+      <Router>
+        <Header></Header>
+        <Switch>
+          <Route exact path="/">
+            <Home></Home>
+          </Route>
+          <Route path="/info/:countryId">
+            <CountryInfo></CountryInfo>
+          </Route>
+        </Switch>
+      </Router>
+    </div>
+  );
+};
 
-
-    function App() {
-
-      const [countries, setCountries] = useState([]);
-      const [cart, setCart] = useState([]);
-
-      useEffect(() => {
-        fetch('https://restcountries.eu/rest/v2/all')
-        .then(res => res.json())
-        .then(data => {
-          setCountries(data);
-        })
-        .catch(err => {
-          console.log(err.message);
-        })
-      }, [])
-
-      const handleAdd = (country) => {
-        const newCountry = [...cart, country];
-            setCart(newCountry);
-      }
-
-      return (
-        <div className="App">
-          <h1>Hello world!</h1>
-        <h1>Total country: {countries.length} </h1>
-        <h3>Country added: {cart.length} </h3>
-
-        <Cart cart = { cart } />
-
-        <ul>
-          {
-            countries.map(country => <Country country = {country} handleAdd = {handleAdd} key = {country.alpha3Code}> </Country>)
-          }
-        </ul>
-
-        </div>
-      );
-    }
-
-    export default App;
+export default App;
