@@ -42,7 +42,7 @@ const CountryInfo = () => {
       <h6>Region: {country.region} </h6>
       <h6>Population: {country.population} </h6>
       <h6>Area: {country.area} </h6>
-
+      <h6>Currencies: {country?.currencies?.[0].name} </h6>
       <Button onClick={() => goBack()}>Go Back</Button>
     </div>
   );
